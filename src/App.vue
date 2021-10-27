@@ -24,7 +24,6 @@ export default {
   components: { DirComp, SingleComp },
   data: () => ({
     items: [items],
-    tree: []
   })
 
 };
@@ -39,5 +38,10 @@ export default {
   cursor: pointer;
   margin-left: 20px;
   margin-top: 10px;
+}
+.item {
+  &:hover, &.active {
+    background-color: #e4e4e4;
+  }
 }
 </style>

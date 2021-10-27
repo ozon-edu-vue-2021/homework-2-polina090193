@@ -2,7 +2,7 @@
   <div class="directory">
     <details>
       <summary @click="toggleOpen">
-        <v-icon>{{ "mdi-folder" }}</v-icon>
+        
         {{ item.name }}
       </summary>
 

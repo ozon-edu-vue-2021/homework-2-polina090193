@@ -1,18 +1,21 @@
 <template>
-  <div class="item" @click="toggleActive">
-    <v-icon v-if="item.type === 'file'">
-      {{ "mdi-file-document-outline" }}
-    </v-icon>
-    <v-icon v-else-if="item.type === 'link'">
-      {{ "mdi-link" }}
-    </v-icon>
+  <div v-click-outside="unselect" :class="['item', {
+          'active': selected
+        }]" @click="selectItem">
+    
     {{ item.name }}
   </div>
 </template>
 
 <script>
+import clickOutside from "../utils/directives/clickOutside";
+
 export default {
   name: "SingleComp",
+
+  directives: {
+    clickOutside
+  },
 
   props: {
     item: {
@@ -21,18 +24,17 @@ export default {
     },
   },
 
+  data: () => ({
+    selected: false
+  }),
+
   methods: {
-    toggleActive(e) {
-      e.target.classList.toggle('active')
+    selectItem () {
+      this.selected = !this.selected
+    },
+    unselect() {
+      this.selected = false
     }
-  }
+  },
 };
 </script>
-
-<style lang="scss">
-  .item {
-    &:hover, &.active {
-      background-color: #e4e4e4;
-    }
-  }
-</style>
