@@ -12,29 +12,6 @@
         </nav>
       </div>
     </div>
-
-    <div class="tree vuetify-tree">
-      <h1 class="title">Vuetify</h1>
-      <v-treeview
-        v-model="tree"
-        :items="items"
-        :item-children="'contents'"
-        activatable
-        open-on-click
-      >
-        <template v-slot:prepend="{ item }">
-          <v-icon v-if="item.type === 'directory'">
-            {{ "mdi-folder" }}
-          </v-icon>
-          <v-icon v-else-if="item.type === 'file'">
-            {{ "mdi-file-document-outline" }}
-          </v-icon>
-          <v-icon v-else-if="item.type === 'link'">
-            {{ "mdi-link" }}
-          </v-icon>
-        </template>
-      </v-treeview>
-    </div>
   </div>
 </template>
 
@@ -47,8 +24,9 @@ export default {
   components: { DirComp, SingleComp },
   data: () => ({
     items: [items],
-    tree: [],
-  }),
+    tree: []
+  })
+
 };
 </script>
 

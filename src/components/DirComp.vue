@@ -1,20 +1,25 @@
 <template>
   <div class="directory">
     <details>
-      <summary>
+      <summary @click="toggleOpen">
         <v-icon>{{ "mdi-folder" }}</v-icon>
         {{ item.name }}
       </summary>
 
-      <nav
-        class="directory-items"
-        v-for="(content, i) in item.contents"
-        :key="i"
-      >
-          <dir-comp v-if="content.type === 'directory'" :item="content"></dir-comp>
+      <div v-if="opened" class="directory-inner">
+        <nav
+          class="directory-items"
+          v-for="(content, i) in item.contents"
+          :key="i"
+        >
+          <dir-comp
+            v-if="content.type === 'directory'"
+            :item="content"
+          ></dir-comp>
 
           <single-comp v-else :item="content"></single-comp>
-      </nav>
+        </nav>
+      </div>
     </details>
   </div>
 </template>
@@ -31,6 +36,18 @@ export default {
     item: {
       type: Object,
       default: () => {},
+    },
+  },
+
+  data: function () {
+    return {
+      opened: false,
+    };
+  },
+
+  methods: {
+    toggleOpen() {
+      this.opened = !this.opened;
     },
   },
 };
