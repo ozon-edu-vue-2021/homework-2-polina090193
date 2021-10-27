@@ -2,7 +2,7 @@
   <div class="directory">
     <details>
       <summary @click="toggleOpen">
-        
+        <img src="../assets/icons/folder.svg" alt="" class="icon directory-icon">
         {{ item.name }}
       </summary>
 

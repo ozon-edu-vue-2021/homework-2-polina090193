@@ -2,7 +2,7 @@
   <div v-click-outside="unselect" :class="['item', {
           'active': selected
         }]" @click="selectItem">
-    
+    <img :src="getIconUrl(item.type)" alt="" class="icon single-icon">
     {{ item.name }}
   </div>
 </template>
@@ -34,6 +34,10 @@ export default {
     },
     unselect() {
       this.selected = false
+    },
+    getIconUrl(type) {
+      const icons = require.context('../assets/icons/', false, /\.svg$/)
+      return icons('./' + type + '.svg')
     }
   },
 };
