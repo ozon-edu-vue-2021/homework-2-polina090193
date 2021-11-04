@@ -10,19 +10,13 @@
   >
     <img :src="getIconUrl(item.type)" alt="" class="icon single-icon" />
     {{ item.name }}
-    <!-- v-click-outside="unselect" -->
   </div>
 </template>
 
 <script>
-// import clickOutside from "../utils/directives/clickOutside";
 
 export default {
   name: "SingleComp",
-
-  /* directives: {
-    clickOutside
-  }, */
 
   props: {
     item: {
@@ -35,24 +29,27 @@ export default {
     },
   },
 
-  inject: ["selectedPath"],
+  inject: ["getSelectedPath"],
+
+  computed: {
+    selectedPath() {
+      return this.getSelectedPath();
+    },
+    selected() {
+      return this.selectedPath === this.compPath
+    },
+  },
 
   data() {
     return {
       compPath: this.path + this.item.name,
-      selected: this.selectedPath === this.path,
     };
   },
 
   methods: {
     selectItem(e) {
-      // this.selected = !this.selected
       this.$emit("select-item", e, this.compPath);
     },
-    /* unselect() {
-      this.selected = false
-      this.$emit('unselect-item')
-    }, */
     getIconUrl(type) {
       const icons = require.context("../assets/icons/", false, /\.svg$/);
       return icons("./" + type + ".svg");

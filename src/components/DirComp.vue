@@ -8,7 +8,7 @@
 
       <div v-if="opened" class="directory-inner">
         <nav
-          class="directory-items"
+          class="directory-item"
           v-for="(content, i) in item.contents"
           :key="i"
         >
