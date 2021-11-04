@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="tree components-tree">
-      <h1 class="title">Components</h1>
+      <p class="title">Selected Item: {{selectedPath || 'Nothing is selected'}}</p>
       <div class="directories-root" v-for="(item, i) in items" :key="i">
         <nav v-if="item.type === 'directory'">
           <dir-comp :item="item" :path="path" @select-item="selectItem"></dir-comp>
@@ -33,7 +33,7 @@ export default {
     };
   },
   methods: {
-    selectItem(pathToComp) {
+    selectItem(e, pathToComp) {
       this.selectedPath = pathToComp;
     },
   }

@@ -4,8 +4,6 @@
       <summary @click="toggleOpen">
         <img src="../assets/icons/folder.svg" alt="" class="icon directory-icon">
         {{ item.name }}
-        <br>
-        {{compPath}}
       </summary>
 
       <div v-if="opened" class="directory-inner">

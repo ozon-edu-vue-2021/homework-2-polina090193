@@ -10,8 +10,6 @@
   >
     <img :src="getIconUrl(item.type)" alt="" class="icon single-icon" />
     {{ item.name }}
-    <br />
-    {{ compPath }}
     <!-- v-click-outside="unselect" -->
   </div>
 </template>
