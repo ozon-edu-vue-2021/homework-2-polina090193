@@ -4,11 +4,11 @@
       <h1 class="title">Components</h1>
       <div class="directories-root" v-for="(item, i) in items" :key="i">
         <nav v-if="item.type === 'directory'">
-          <dir-comp :item="item"></dir-comp>
+          <dir-comp :item="item" :path="path" @select-item="selectItem"></dir-comp>
         </nav>
 
         <nav v-else>
-          <single-comp :item="content"></single-comp>
+          <single-comp :path="path" :item="content" @select-item="selectItem"></single-comp>
         </nav>
       </div>
     </div>
@@ -24,8 +24,19 @@ export default {
   components: { DirComp, SingleComp },
   data: () => ({
     items: [items],
-  })
-
+    selectedPath: '',
+    path: 'Root/'
+  }),
+  provide() {
+    return {
+      selectedPath: this.selectedPath,
+    };
+  },
+  methods: {
+    selectItem(pathToComp) {
+      this.selectedPath = pathToComp;
+    },
+  }
 };
 </script>
 
@@ -40,7 +51,8 @@ export default {
   margin-top: 10px;
 }
 .item {
-  &:hover, &.active {
+  &:hover,
+  &.active {
     background-color: #e4e4e4;
   }
 }

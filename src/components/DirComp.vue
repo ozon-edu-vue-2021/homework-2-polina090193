@@ -4,6 +4,8 @@
       <summary @click="toggleOpen">
         <img src="../assets/icons/folder.svg" alt="" class="icon directory-icon">
         {{ item.name }}
+        <br>
+        {{compPath}}
       </summary>
 
       <div v-if="opened" class="directory-inner">
@@ -14,10 +16,10 @@
         >
           <dir-comp
             v-if="content.type === 'directory'"
-            :item="content"
+            :item="content" v-on="$listeners" :path="compPath"
           ></dir-comp>
 
-          <single-comp v-else :item="content"></single-comp>
+          <single-comp :path="compPath" v-else :item="content" v-on="$listeners"></single-comp>
         </nav>
       </div>
     </details>
@@ -37,11 +39,22 @@ export default {
       type: Object,
       default: () => {},
     },
+    path: {
+      type: String,
+      default: '',
+    }
   },
 
   data: function () {
     return {
       opened: false,
+      compPath: this.path + this.item.name + '/',
+    }
+  },
+
+  provide() {
+    return {
+      selectedItem: this.selectedItem,
     };
   },
 
