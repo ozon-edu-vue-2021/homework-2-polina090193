@@ -1,28 +1,54 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="tree components-tree">
+      <h1 class="title">Components</h1>
+      <div class="directories-root" v-for="(item, i) in items" :key="i">
+        <nav v-if="item.type === 'directory'">
+          <dir-comp :item="item"></dir-comp>
+        </nav>
+
+        <nav v-else>
+          <single-comp :item="content"></single-comp>
+        </nav>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import items from "../public/static/node_modules.json";
+import DirComp from "./components/DirComp";
+import SingleComp from "./components/SingleComp";
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  components: { DirComp, SingleComp },
+  data: () => ({
+    items: [items],
+  })
+
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style lang="scss">
+.tree {
+  margin: 3rem;
+}
+.item,
+.directory {
+  cursor: pointer;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+.item {
+  &:hover, &.active {
+    background-color: #e4e4e4;
+  }
+}
+.icon {
+  position: relative;
+  top: 5px;
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
 }
 </style>
